@@ -1,1 +1,1 @@
-__all__ = ["LeadingParton"]
+__all__ = ["LeadingParton", "ExpCut"]

@@ -74,5 +74,3 @@ def Yield(particle_dict, pTbins, ybins, pid_POI, order=4):
 		results[pid]['shape'] /= Ntot
 	return results
 
-
-
