@@ -16,6 +16,19 @@ def threevec_to_curvelinear(px, py, pz, M):
 	y = .5*np.log((E+pz)/(E-pz))
 	return E, pT, y, phi
 
+def EventPlane(particle_dict, pTcut, ycut, order=6):
+	pT = particle_dict['pT']
+	phi = particle_dict['phi']
+	y = particle_dict['y']
+
+	results = {'Qn':{}, 'M':{}}
+	cut = (pTcut[0]<pT) & (pT<pTcut[1]) & (ycut[0]<y) & (y<ycut[1])
+	phi = phi[cut]
+	for n in range(1, 1+order):
+		results['Qn'][n] = np.exp(1j*n*phi).sum()
+		results['M'][m] = cut.sum()
+	return results
+
 def Qvector(particle_dict, pTbins, ybins, pid_POI, order=4):
 	pT = particle_dict['pT']
 	phi = particle_dict['phi']
@@ -34,7 +47,7 @@ def Qvector(particle_dict, pTbins, ybins, pid_POI, order=4):
 		pid_cut = (pid == particle_dict['pid'])
 		for i, (pl, ph) in enumerate(pTbins):
 			pT_cut = (pl<=pT) & (pT<=ph)
-			for j, (yl, ph) in enumerate(ybins):
+			for j, (yl, yh) in enumerate(ybins):
 				y_cut = (yl<=y) & (y<=yh)			
 				indices = pid_cut & pT_cut & y_cut
 				# apply cut
@@ -42,7 +55,7 @@ def Qvector(particle_dict, pTbins, ybins, pid_POI, order=4):
 				w_POI = w[indices]
 		
 				for n in range(1, 1+order):
-					results[pid]['Qn'][i,j,n] = np.sum(np.exp(1j*n*phi_POI)*w_POI)
+					results[pid]['Qn'][i,j,n-1] = np.sum(np.exp(1j*n*phi_POI)*w_POI)
 				results[pid]['M'][i,j] = w_POI.sum()
 	return results
 
@@ -63,7 +76,7 @@ def Yield(particle_dict, pTbins, ybins, pid_POI, order=4):
 		pid_cut = (pid == particle_dict['pid'])
 		for i, (pl, ph) in enumerate(pTbins):
 			pT_cut = (pl<=pT) & (pT<=ph)
-			for j, (yl, ph) in enumerate(ybins):
+			for j, (yl, yh) in enumerate(ybins):
 				y_cut = (yl<=y) & (y<=yh)			
 				indices = pid_cut & pT_cut & y_cut
 				# apply cut
