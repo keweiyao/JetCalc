@@ -40,7 +40,7 @@ def Qvector(particle_dict, pTbins, ybins, pid_POI, order=4):
 
 	# calculate Qn
 	results = {pid : 
-				{'M': np.zeros([len(pTbins), len(ybins)], dtype=np.int),
+				{'M': np.zeros([len(pTbins), len(ybins)], dtype=np.float),
 				 'Qn': np.zeros([len(pTbins), len(ybins), order], dtype=np.complex)}
 				for pid in pid_POI}
 	for pid in pid_POI:
