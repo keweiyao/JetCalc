@@ -76,22 +76,22 @@ cuts = {
 'STAR':{
        'Raa':{
                'pTbins': np.array([[2,2.5],[2.5,3],[3,3.5],[3.5,4],[4,5],[5,8]]),
-               'ybins': np.array([-1.0,1.0]),
+               'ybins': np.array([[-1.0,1.0]]),
                'cenbins': np.array([[0,10]])
           },
        'vn_HF':{
                'pTbins': np.array([[1,2],[2,3],[3,4],[4,5],[5,7]]),
-               'ybins': np.array([-1.0,1.0]),
+               'ybins': np.array([[-1.0,1.0]]),
                'cenbins': np.array([[0,80]])
           },
        'Raa_B':{
                'pTbins': np.array([[2,2.5],[2.5,3],[3,3.5],[3.5,4],[4,5],[5,8]]),
-               'ybins': np.array([-1.0,1.0]),
+               'ybins': np.array([[-1.0,1.0]]),
                'cenbins': np.array([[0,10]])
              },
        'vn_B':{
                'pTbins': np.array([[1,2],[2,3],[3,4],[4,5],[5,7]]),
-               'ybins': np.array([-1.0,1.0]),
+               'ybins': np.array([[-1.0,1.0]]),
                'cenbins': np.array([[0,80]])
           },
         'vn_ref':{
