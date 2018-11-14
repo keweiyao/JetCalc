@@ -69,9 +69,8 @@ def Yield(particle_dict, pTbins, ybins, pid_POI, order=4):
 		w = particle_dict['w']
 
 	# calculate Qn
-	results = {pid : 
-				{'shape': np.zeros([len(pTbins), len(ybins)], dtype=np.float),
-				 'Ntot': 0.0} for pid in pid_POI}
+	results = {pid : np.zeros([len(pTbins), len(ybins)], dtype=np.float) 
+					for pid in pid_POI}
 	for pid in pid_POI:
 		pid_cut = (pid == particle_dict['pid'])
 		for i, (pl, ph) in enumerate(pTbins):
@@ -81,9 +80,6 @@ def Yield(particle_dict, pTbins, ybins, pid_POI, order=4):
 				indices = pid_cut & pT_cut & y_cut
 				# apply cut
 				w_POI = w[indices]
-				results[pid]['shape'][i,j] = w_POI.sum()
-		Ntot = results[pid]['shape'].sum()
-		results[pid]['Ntot'] = Ntot
-		results[pid]['shape'] /= Ntot
+				results[pid][i,j] = w_POI.sum()
 	return results
 
